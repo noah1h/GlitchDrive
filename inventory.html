@@ -78,9 +78,9 @@
         <a href="index.html" class="logo">GlitchDrive</a>
 
         <div class="nav-links-container d-none d-lg-flex">
-          <a class="active scramble-text" data-text="Home" href="index.html">Home</a>
+          <a class="nav-links scramble-text" data-text="Home" href="index.html">Home</a>
           <a class="nav-links scramble-text" data-text="About us" href="about.html">About us</a>
-          <a class="nav-links scramble-text" data-text="Inventory" href="inventory.html">Inventory</a>
+          <a class="active scramble-text" data-text="Inventory" href="inventory.html">Inventory</a>
           <a class="nav-links scramble-text" data-text="Sell/Trade" href="#">Sell/Trade</a>
           <a class="glitch-button scramble-text" data-text="Contact us" href="#memberships">
             <span>Contact us</span></a>
@@ -109,8 +109,554 @@
         </svg>
       </div>
     </nav>
-
-    <main></main>
+    <div class="search-bar">
+      <div class="container d-flex flex-row align-items-center h-100">
+      <div class="search-bar-title pe-5 w-50">Search for a car</div>
+      <div class="search-bar-container">
+        <button type="submit" class="search-button">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search search-svg" viewBox="0 0 16 16">
+            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+          </svg>
+        </button>
+        
+        
+      <input type="text" class="search-bar-input" placeholder="Search">
+    </div>
+    </div>
+    </div>
+    <main id="inventory">
+      <div class="container">
+      <div class="store-title title scramble-auto">Best sellers:</div>
+    </div>
+      <div class="swiper">
+        <div class="swiper-wrapper">
+    
+          <div class="swiper-slide">
+            <div data-aos="fade-up" class="card-container">
+              <div class="car-card">
+                <div class="car-image">
+                  <div class="slider-car car-1"></div>
+                </div>
+                <div class="card-content d-flex flex-column justify-content-between h-100">
+                  <div class="car-name">Porsche 911 GT3</div>
+                  <div class="desc car-desc">Track-bred performance meets street-ready style. The 911 GT3 delivers raw power, precision handling, and iconic Porsche design.
+                  <br>
+                   
+                  </div>
+                  <div class="car-price" data-price="99,999">99,999$</div>
+                  <div class="card-buttons row g-1 mt-auto">
+                    <div class="col-12">
+                      <a href="car-details.html">
+                        <button class="buy-button scramble-text" data-text="View Details">View Details</button>
+                      </a>  
+                      </div>
+                    <div class="col-4">
+                      <button class="heart-button">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6 heart-svg">
+                        <path d="m11.645 20.91-.007-.003-.022-.012a15.247 15.247 0 0 1-.383-.218 25.18 25.18 0 0 1-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0 1 12 5.052 5.5 5.5 0 0 1 16.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 0 1-4.244 3.17 15.247 15.247 0 0 1-.383.219l-.022.012-.007.004-.003.001a.752.752 0 0 1-.704 0l-.003-.001Z" />
+                      </svg>
+                    </button></div>
+                    
+                    <div class="col-8">
+                      <button class="buy-button scramble-text" data-text="Buy Now">Buy now</button>
+                    </div>
+                    
+                </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div data-aos="fade-up" data-aos-delay="100" class="card-container">
+              <div class="car-card">
+                <div class="car-image">
+                  <div class="slider-car car-2"></div>
+                </div>
+                <div class="card-content d-flex flex-column justify-content-between h-100">
+                  <div class="car-name">BMW M4</div>
+                  <div class="desc car-desc"> A bold, aggressive coupe with twin-turbo muscle and razor-sharp agility. The M4 delivers daily comfort and track-ready thrills in one head-turning package.
+                    <br>
+                   
+                  </div>
+                  <div class="car-price" data-price="89,999">89,999$</div>
+                  <div class="card-buttons row g-1 mt-auto">
+                    <div class="col-12">
+                      <a href="car-details.html">
+                        <button class="buy-button scramble-text" data-text="View Details">View Details</button>
+                      </a>  
+                      </div>
+                    <div class="col-4"><button class="heart-button">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6 heart-svg">
+                        <path d="m11.645 20.91-.007-.003-.022-.012a15.247 15.247 0 0 1-.383-.218 25.18 25.18 0 0 1-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0 1 12 5.052 5.5 5.5 0 0 1 16.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 0 1-4.244 3.17 15.247 15.247 0 0 1-.383.219l-.022.012-.007.004-.003.001a.752.752 0 0 1-.704 0l-.003-.001Z" />
+                      </svg>
+                    </button></div>
+                    <div class="col-8">
+                      <button class="buy-button scramble-text" data-text="Buy Now">Buy now</button>
+                    </div>
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div data-aos="fade-up" data-aos-delay="200" class="card-container">
+              <div class="car-card">
+                <div class="car-image">
+                  <div class="slider-car car-3"></div>
+                </div>
+                <div class="card-content d-flex flex-column justify-content-between h-100">
+                  <div class="car-name">Mercedes-AMG GT63</div>
+                  <div class="desc car-desc">Supercar soul in a luxury sedan’s body. With brutal acceleration, advanced dynamics, and AMG refinement, the GT63 balances power and practicality flawlessly.
+                    <br>
+                   
+                  </div>
+                  <div class="car-price" data-price="159,999">159,999$</div>
+                  <div class="card-buttons row g-1 mt-auto">
+                    <div class="col-12">
+                      <a href="car-details.html">
+                        <button class="buy-button scramble-text" data-text="View Details">View Details</button>
+                      </a>  
+                      </div>
+                    <div class="col-4"><button class="heart-button">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6 heart-svg">
+                        <path d="m11.645 20.91-.007-.003-.022-.012a15.247 15.247 0 0 1-.383-.218 25.18 25.18 0 0 1-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0 1 12 5.052 5.5 5.5 0 0 1 16.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 0 1-4.244 3.17 15.247 15.247 0 0 1-.383.219l-.022.012-.007.004-.003.001a.752.752 0 0 1-.704 0l-.003-.001Z" />
+                      </svg>
+                    </button></div>
+                    <div class="col-8">
+                      <button class="buy-button scramble-text" data-text="Buy Now">Buy now</button>
+                    </div>
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div data-aos="fade-up" data-aos-delay="300" class="card-container">
+              <div class="car-card">
+                <div class="car-image">
+                  <div class="slider-car car-4"></div>
+                </div>
+                <div class="card-content d-flex flex-column justify-content-between h-100">
+                  <div class="car-name">Audi RS5 Sportback</div>
+                  <div class="desc car-desc">Sleek, powerful, and quattro-driven. The RS5 Sportback offers turbocharged excitement and everyday usability, wrapped in Audi’s signature sharp lines.
+                   
+                  </div>
+                  <div class="car-price" data-price="79,999">79,999$</div>
+                  <div class="card-buttons row g-1 mt-auto">
+                    <div class="col-12">
+                      <a href="car-details.html">
+                        <button class="buy-button scramble-text" data-text="View Details">View Details</button>
+                      </a>  
+                      </div>
+                    <div class="col-4"><button class="heart-button">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6 heart-svg">
+                        <path d="m11.645 20.91-.007-.003-.022-.012a15.247 15.247 0 0 1-.383-.218 25.18 25.18 0 0 1-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0 1 12 5.052 5.5 5.5 0 0 1 16.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 0 1-4.244 3.17 15.247 15.247 0 0 1-.383.219l-.022.012-.007.004-.003.001a.752.752 0 0 1-.704 0l-.003-.001Z" />
+                      </svg>
+                    </button></div>
+                    <div class="col-8">
+                      <button class="buy-button scramble-text" data-text="Buy Now">Buy now</button>
+                    </div>
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div data-aos="fade-up" class="card-container">
+              <div class="car-card">
+                <div class="car-image">
+                  <div class="slider-car car-5"></div>
+                </div>
+                <div class="card-content d-flex flex-column justify-content-between h-100">
+                  <div class="car-name">Mercedes-Benz G-Class G63 AMG</div>
+                  <div class="desc car-desc"> Iconic off-road legend meets AMG power. The G63 combines unmatched luxury with a V8 roar and bold boxy presence that commands attention on any terrain.
+                   
+                  </div>
+                  <div class="car-price" data-price="179,999">179,999$</div>
+                  <div class="card-buttons row g-1 mt-auto">
+                    <div class="col-12">
+                    <a href="car-details.html">
+                      <button class="buy-button scramble-text" data-text="View Details">View Details</button>
+                    </a>  
+                    </div>
+                    <div class="col-4"><button class="heart-button">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6 heart-svg">
+                        <path d="m11.645 20.91-.007-.003-.022-.012a15.247 15.247 0 0 1-.383-.218 25.18 25.18 0 0 1-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0 1 12 5.052 5.5 5.5 0 0 1 16.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 0 1-4.244 3.17 15.247 15.247 0 0 1-.383.219l-.022.012-.007.004-.003.001a.752.752 0 0 1-.704 0l-.003-.001Z" />
+                      </svg>
+                      
+                    </button></div>
+                    <div class="col-8">
+                      <button class="buy-button scramble-text" data-text="Buy Now">Buy now</button>
+                    </div>
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+    
+        </div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+      </div>
+      <div class="container">
+      <div class="store-title title scramble-auto">Latest Releases:</div>
+    </div>
+      <div class="swiper">
+        <div class="swiper-wrapper">
+    
+          <div class="swiper-slide">
+            <div data-aos="fade-up" class="card-container">
+              <div class="car-card">
+                <div class="car-image">
+                  <div class="slider-car car-1"></div>
+                </div>
+                <div class="card-content d-flex flex-column justify-content-between h-100">
+                  <div class="car-name">Porsche 911 GT3</div>
+                  <div class="desc car-desc">Track-bred performance meets street-ready style. The 911 GT3 delivers raw power, precision handling, and iconic Porsche design.
+                  <br>
+                   
+                  </div>
+                  <div class="car-price" data-price="99,999">99,999$</div>
+                  <div class="card-buttons row g-1 mt-auto">
+                    <div class="col-12">
+                      <a href="car-details.html">
+                        <button class="buy-button scramble-text" data-text="View Details">View Details</button>
+                      </a>  
+                      </div>
+                    <div class="col-4">
+                      <button class="heart-button">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6 heart-svg">
+                        <path d="m11.645 20.91-.007-.003-.022-.012a15.247 15.247 0 0 1-.383-.218 25.18 25.18 0 0 1-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0 1 12 5.052 5.5 5.5 0 0 1 16.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 0 1-4.244 3.17 15.247 15.247 0 0 1-.383.219l-.022.012-.007.004-.003.001a.752.752 0 0 1-.704 0l-.003-.001Z" />
+                      </svg>
+                    </button></div>
+                    
+                    <div class="col-8">
+                      <button class="buy-button scramble-text" data-text="Buy Now">Buy now</button>
+                    </div>
+                    
+                </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div data-aos="fade-up" data-aos-delay="100" class="card-container">
+              <div class="car-card">
+                <div class="car-image">
+                  <div class="slider-car car-2"></div>
+                </div>
+                <div class="card-content d-flex flex-column justify-content-between h-100">
+                  <div class="car-name">BMW M4</div>
+                  <div class="desc car-desc"> A bold, aggressive coupe with twin-turbo muscle and razor-sharp agility. The M4 delivers daily comfort and track-ready thrills in one head-turning package.
+                    <br>
+                   
+                  </div>
+                  <div class="car-price" data-price="89,999">89,999$</div>
+                  <div class="card-buttons row g-1 mt-auto">
+                    <div class="col-12">
+                      <a href="car-details.html">
+                        <button class="buy-button scramble-text" data-text="View Details">View Details</button>
+                      </a>  
+                      </div>
+                    <div class="col-4"><button class="heart-button">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6 heart-svg">
+                        <path d="m11.645 20.91-.007-.003-.022-.012a15.247 15.247 0 0 1-.383-.218 25.18 25.18 0 0 1-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0 1 12 5.052 5.5 5.5 0 0 1 16.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 0 1-4.244 3.17 15.247 15.247 0 0 1-.383.219l-.022.012-.007.004-.003.001a.752.752 0 0 1-.704 0l-.003-.001Z" />
+                      </svg>
+                    </button></div>
+                    <div class="col-8">
+                      <button class="buy-button scramble-text" data-text="Buy Now">Buy now</button>
+                    </div>
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div data-aos="fade-up" data-aos-delay="200" class="card-container">
+              <div class="car-card">
+                <div class="car-image">
+                  <div class="slider-car car-3"></div>
+                </div>
+                <div class="card-content d-flex flex-column justify-content-between h-100">
+                  <div class="car-name">Mercedes-AMG GT63</div>
+                  <div class="desc car-desc">Supercar soul in a luxury sedan’s body. With brutal acceleration, advanced dynamics, and AMG refinement, the GT63 balances power and practicality flawlessly.
+                    <br>
+                   
+                  </div>
+                  <div class="car-price" data-price="159,999">159,999$</div>
+                  <div class="card-buttons row g-1 mt-auto">
+                    <div class="col-12">
+                      <a href="car-details.html">
+                        <button class="buy-button scramble-text" data-text="View Details">View Details</button>
+                      </a>  
+                      </div>
+                    <div class="col-4"><button class="heart-button">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6 heart-svg">
+                        <path d="m11.645 20.91-.007-.003-.022-.012a15.247 15.247 0 0 1-.383-.218 25.18 25.18 0 0 1-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0 1 12 5.052 5.5 5.5 0 0 1 16.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 0 1-4.244 3.17 15.247 15.247 0 0 1-.383.219l-.022.012-.007.004-.003.001a.752.752 0 0 1-.704 0l-.003-.001Z" />
+                      </svg>
+                    </button></div>
+                    <div class="col-8">
+                      <button class="buy-button scramble-text" data-text="Buy Now">Buy now</button>
+                    </div>
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div data-aos="fade-up" data-aos-delay="300" class="card-container">
+              <div class="car-card">
+                <div class="car-image">
+                  <div class="slider-car car-4"></div>
+                </div>
+                <div class="card-content d-flex flex-column justify-content-between h-100">
+                  <div class="car-name">Audi RS5 Sportback</div>
+                  <div class="desc car-desc">Sleek, powerful, and quattro-driven. The RS5 Sportback offers turbocharged excitement and everyday usability, wrapped in Audi’s signature sharp lines.
+                   
+                  </div>
+                  <div class="car-price" data-price="79,999">79,999$</div>
+                  <div class="card-buttons row g-1 mt-auto">
+                    <div class="col-12">
+                      <a href="car-details.html">
+                        <button class="buy-button scramble-text" data-text="View Details">View Details</button>
+                      </a>  
+                      </div>
+                    <div class="col-4"><button class="heart-button">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6 heart-svg">
+                        <path d="m11.645 20.91-.007-.003-.022-.012a15.247 15.247 0 0 1-.383-.218 25.18 25.18 0 0 1-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0 1 12 5.052 5.5 5.5 0 0 1 16.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 0 1-4.244 3.17 15.247 15.247 0 0 1-.383.219l-.022.012-.007.004-.003.001a.752.752 0 0 1-.704 0l-.003-.001Z" />
+                      </svg>
+                    </button></div>
+                    <div class="col-8">
+                      <button class="buy-button scramble-text" data-text="Buy Now">Buy now</button>
+                    </div>
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div data-aos="fade-up" class="card-container">
+              <div class="car-card">
+                <div class="car-image">
+                  <div class="slider-car car-5"></div>
+                </div>
+                <div class="card-content d-flex flex-column justify-content-between h-100">
+                  <div class="car-name">Mercedes-Benz G-Class G63 AMG</div>
+                  <div class="desc car-desc"> Iconic off-road legend meets AMG power. The G63 combines unmatched luxury with a V8 roar and bold boxy presence that commands attention on any terrain.
+                   
+                  </div>
+                  <div class="car-price" data-price="179,999">179,999$</div>
+                  <div class="card-buttons row g-1 mt-auto">
+                    <div class="col-12">
+                    <a href="car-details.html">
+                      <button class="buy-button scramble-text" data-text="View Details">View Details</button>
+                    </a>  
+                    </div>
+                    <div class="col-4"><button class="heart-button">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6 heart-svg">
+                        <path d="m11.645 20.91-.007-.003-.022-.012a15.247 15.247 0 0 1-.383-.218 25.18 25.18 0 0 1-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0 1 12 5.052 5.5 5.5 0 0 1 16.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 0 1-4.244 3.17 15.247 15.247 0 0 1-.383.219l-.022.012-.007.004-.003.001a.752.752 0 0 1-.704 0l-.003-.001Z" />
+                      </svg>
+                      
+                    </button></div>
+                    <div class="col-8">
+                      <button class="buy-button scramble-text" data-text="Buy Now">Buy now</button>
+                    </div>
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+    
+        </div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+      </div>
+      <div class="container">
+      <div class="store-title title scramble-auto">Electric Cars:</div>
+    </div>
+      <div class="swiper">
+        <div class="swiper-wrapper">
+    
+          <div class="swiper-slide">
+            <div data-aos="fade-up" class="card-container">
+              <div class="car-card">
+                <div class="car-image">
+                  <div class="slider-car car-1"></div>
+                </div>
+                <div class="card-content d-flex flex-column justify-content-between h-100">
+                  <div class="car-name">Porsche 911 GT3</div>
+                  <div class="desc car-desc">Track-bred performance meets street-ready style. The 911 GT3 delivers raw power, precision handling, and iconic Porsche design.
+                  <br>
+                   
+                  </div>
+                  <div class="car-price" data-price="99,999">99,999$</div>
+                  <div class="card-buttons row g-1 mt-auto">
+                    <div class="col-12">
+                      <a href="car-details.html">
+                        <button class="buy-button scramble-text" data-text="View Details">View Details</button>
+                      </a>  
+                      </div>
+                    <div class="col-4">
+                      <button class="heart-button">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6 heart-svg">
+                        <path d="m11.645 20.91-.007-.003-.022-.012a15.247 15.247 0 0 1-.383-.218 25.18 25.18 0 0 1-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0 1 12 5.052 5.5 5.5 0 0 1 16.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 0 1-4.244 3.17 15.247 15.247 0 0 1-.383.219l-.022.012-.007.004-.003.001a.752.752 0 0 1-.704 0l-.003-.001Z" />
+                      </svg>
+                    </button></div>
+                    
+                    <div class="col-8">
+                      <button class="buy-button scramble-text" data-text="Buy Now">Buy now</button>
+                    </div>
+                    
+                </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div data-aos="fade-up" data-aos-delay="100" class="card-container">
+              <div class="car-card">
+                <div class="car-image">
+                  <div class="slider-car car-2"></div>
+                </div>
+                <div class="card-content d-flex flex-column justify-content-between h-100">
+                  <div class="car-name">BMW M4</div>
+                  <div class="desc car-desc"> A bold, aggressive coupe with twin-turbo muscle and razor-sharp agility. The M4 delivers daily comfort and track-ready thrills in one head-turning package.
+                    <br>
+                   
+                  </div>
+                  <div class="car-price" data-price="89,999">89,999$</div>
+                  <div class="card-buttons row g-1 mt-auto">
+                    <div class="col-12">
+                      <a href="car-details.html">
+                        <button class="buy-button scramble-text" data-text="View Details">View Details</button>
+                      </a>  
+                      </div>
+                    <div class="col-4"><button class="heart-button">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6 heart-svg">
+                        <path d="m11.645 20.91-.007-.003-.022-.012a15.247 15.247 0 0 1-.383-.218 25.18 25.18 0 0 1-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0 1 12 5.052 5.5 5.5 0 0 1 16.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 0 1-4.244 3.17 15.247 15.247 0 0 1-.383.219l-.022.012-.007.004-.003.001a.752.752 0 0 1-.704 0l-.003-.001Z" />
+                      </svg>
+                    </button></div>
+                    <div class="col-8">
+                      <button class="buy-button scramble-text" data-text="Buy Now">Buy now</button>
+                    </div>
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div data-aos="fade-up" data-aos-delay="200" class="card-container">
+              <div class="car-card">
+                <div class="car-image">
+                  <div class="slider-car car-3"></div>
+                </div>
+                <div class="card-content d-flex flex-column justify-content-between h-100">
+                  <div class="car-name">Mercedes-AMG GT63</div>
+                  <div class="desc car-desc">Supercar soul in a luxury sedan’s body. With brutal acceleration, advanced dynamics, and AMG refinement, the GT63 balances power and practicality flawlessly.
+                    <br>
+                   
+                  </div>
+                  <div class="car-price" data-price="159,999">159,999$</div>
+                  <div class="card-buttons row g-1 mt-auto">
+                    <div class="col-12">
+                      <a href="car-details.html">
+                        <button class="buy-button scramble-text" data-text="View Details">View Details</button>
+                      </a>  
+                      </div>
+                    <div class="col-4"><button class="heart-button">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6 heart-svg">
+                        <path d="m11.645 20.91-.007-.003-.022-.012a15.247 15.247 0 0 1-.383-.218 25.18 25.18 0 0 1-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0 1 12 5.052 5.5 5.5 0 0 1 16.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 0 1-4.244 3.17 15.247 15.247 0 0 1-.383.219l-.022.012-.007.004-.003.001a.752.752 0 0 1-.704 0l-.003-.001Z" />
+                      </svg>
+                    </button></div>
+                    <div class="col-8">
+                      <button class="buy-button scramble-text" data-text="Buy Now">Buy now</button>
+                    </div>
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div data-aos="fade-up" data-aos-delay="300" class="card-container">
+              <div class="car-card">
+                <div class="car-image">
+                  <div class="slider-car car-4"></div>
+                </div>
+                <div class="card-content d-flex flex-column justify-content-between h-100">
+                  <div class="car-name">Audi RS5 Sportback</div>
+                  <div class="desc car-desc">Sleek, powerful, and quattro-driven. The RS5 Sportback offers turbocharged excitement and everyday usability, wrapped in Audi’s signature sharp lines.
+                   
+                  </div>
+                  <div class="car-price" data-price="79,999">79,999$</div>
+                  <div class="card-buttons row g-1 mt-auto">
+                    <div class="col-12">
+                      <a href="car-details.html">
+                        <button class="buy-button scramble-text" data-text="View Details">View Details</button>
+                      </a>  
+                      </div>
+                    <div class="col-4"><button class="heart-button">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6 heart-svg">
+                        <path d="m11.645 20.91-.007-.003-.022-.012a15.247 15.247 0 0 1-.383-.218 25.18 25.18 0 0 1-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0 1 12 5.052 5.5 5.5 0 0 1 16.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 0 1-4.244 3.17 15.247 15.247 0 0 1-.383.219l-.022.012-.007.004-.003.001a.752.752 0 0 1-.704 0l-.003-.001Z" />
+                      </svg>
+                    </button></div>
+                    <div class="col-8">
+                      <button class="buy-button scramble-text" data-text="Buy Now">Buy now</button>
+                    </div>
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div data-aos="fade-up" class="card-container">
+              <div class="car-card">
+                <div class="car-image">
+                  <div class="slider-car car-5"></div>
+                </div>
+                <div class="card-content d-flex flex-column justify-content-between h-100">
+                  <div class="car-name">Mercedes-Benz G-Class G63 AMG</div>
+                  <div class="desc car-desc"> Iconic off-road legend meets AMG power. The G63 combines unmatched luxury with a V8 roar and bold boxy presence that commands attention on any terrain.
+                   
+                  </div>
+                  <div class="car-price" data-price="179,999">179,999$</div>
+                  <div class="card-buttons row g-1 mt-auto">
+                    <div class="col-12">
+                    <a href="car-details.html">
+                      <button class="buy-button scramble-text" data-text="View Details">View Details</button>
+                    </a>  
+                    </div>
+                    <div class="col-4"><button class="heart-button">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6 heart-svg">
+                        <path d="m11.645 20.91-.007-.003-.022-.012a15.247 15.247 0 0 1-.383-.218 25.18 25.18 0 0 1-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0 1 12 5.052 5.5 5.5 0 0 1 16.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 0 1-4.244 3.17 15.247 15.247 0 0 1-.383.219l-.022.012-.007.004-.003.001a.752.752 0 0 1-.704 0l-.003-.001Z" />
+                      </svg>
+                      
+                    </button></div>
+                    <div class="col-8">
+                      <button class="buy-button scramble-text" data-text="Buy Now">Buy now</button>
+                    </div>
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+    
+        </div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+      </div>
+    </main>
     
 
  <!-- jQuery-->
