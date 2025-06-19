@@ -47,6 +47,27 @@ elements.forEach(el => {
     }, 30);
   });
 });
+function scrambleTo(text, element) {
+  let iterations = 0;
+  const chars = "!@#$%^&*()_+1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  clearInterval(element._scrambleInterval); // stop any ongoing animation
+
+  element._scrambleInterval = setInterval(() => {
+    element.innerText = text.split("")
+      .map((char, i) => {
+        if (i < iterations) return text[i];
+        return chars[Math.floor(Math.random() * chars.length)];
+      })
+      .join("");
+
+    iterations += 1 / 3;
+
+    if (iterations >= text.length) {
+      clearInterval(element._scrambleInterval);
+      element.innerText = text;
+    }
+  }, 30);
+}
 
 // on scroll
 const scrambleChars = "!@#$%^&*()_+{}[]<>?/~ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -97,6 +118,58 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
+
+const toggleButtons = document.querySelectorAll("#theme-toggle, #side-theme-toggle");
+
+// Scramble function (reuse your original one)
+function scrambleTo(text, element) {
+  let iterations = 0;
+  const chars = "!@#$%^&*()_+1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  clearInterval(element._scrambleInterval);
+
+  element._scrambleInterval = setInterval(() => {
+    element.innerText = text.split("")
+      .map((char, i) => {
+        if (i < iterations) return text[i];
+        return chars[Math.floor(Math.random() * chars.length)];
+      })
+      .join("");
+
+    iterations += 1 / 3;
+
+    if (iterations >= text.length) {
+      clearInterval(element._scrambleInterval);
+      element.innerText = text;
+    }
+  }, 30);
+}
+
+// Update text and data-text on all toggle buttons
+function updateToggleText() {
+  let newText = document.body.classList.contains("light-mode")
+    ? "Dark Mode"
+    : "Light Mode";
+
+  toggleButtons.forEach(btn => {
+    btn.setAttribute("data-text", newText);
+    scrambleTo(newText, btn);
+  });
+}
+
+// Attach click event to all toggle buttons
+toggleButtons.forEach(btn => {
+  btn.addEventListener("click", () => {
+    document.body.classList.toggle("light-mode");
+    localStorage.setItem("theme", document.body.classList.contains("light-mode") ? "light" : "dark");
+    updateToggleText();
+  });
+});
+
+// Apply saved theme on load and update button text
+if (localStorage.getItem("theme") === "light") {
+  document.body.classList.add("light-mode");
+}
+updateToggleText();
 
 
 
