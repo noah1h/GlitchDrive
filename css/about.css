@@ -1,0 +1,45 @@
+#about {
+  padding-top: 100px;
+  padding-bottom: 50px;
+}
+.highlight {
+  color: var(--secondary-color);
+  font-weight: 700;
+}
+
+#mission {
+  height: auto;
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+.mission-desc {
+  font-size: 18px;
+}
+#clientFeedback {
+  height: auto;
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+.feedback-card-container {
+  clip-path: var(--shape-large);
+  background-color: var(--primary-color);
+  padding: 2px;
+}
+.feedback-card {
+  color: var(--text-color);
+  height: 400px;
+  width: 100%;
+  background: transparent;
+  background-color: var(--background-color);
+  clip-path: var(--shape-large);
+  padding: 15px;
+}
+.client-name {
+  font-weight: 900;
+  font-size: 24px;
+  text-align: center;
+}
+.client-feedback {
+  font-size: 18px;
+  color: var(--desc-color);
+}

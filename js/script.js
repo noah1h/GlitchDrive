@@ -48,6 +48,58 @@ elements.forEach(el => {
   });
 });
 
+// on scroll
+const scrambleChars = "!@#$%^&*()_+{}[]<>?/~ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+const scrambleOnView = (el) => {
+  if (el.classList.contains("is-scrambling")) return; // prevent double run
+
+  const originalHTML = el.innerHTML;
+  const originalText = el.textContent;
+  const iterations = 10;
+  let frame = 0;
+
+  el.classList.add("is-scrambling");
+
+  const scramble = setInterval(() => {
+    let displayed = "";
+    for (let i = 0; i < originalText.length; i++) {
+      if (i < frame) {
+        displayed += originalText[i];
+      } else {
+        displayed += scrambleChars[Math.floor(Math.random() * scrambleChars.length)];
+      }
+    }
+    el.textContent = displayed;
+
+    frame++;
+    if (frame > originalText.length + iterations) {
+      el.innerHTML = originalHTML;
+      el.classList.remove("is-scrambling");
+      clearInterval(scramble);
+    }
+  }, 50);
+};
+
+// Set up Intersection Observer
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      scrambleOnView(entry.target);
+    }
+  });
+});
+
+// Apply to all .scramble-auto elements
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll(".scramble-auto").forEach(el => {
+    observer.observe(el);
+  });
+});
+
+
+
+
 // Initialize Swiper for store page
 const storeSwiper = new Swiper('#store .swiper', {
   slidesPerView: 1,

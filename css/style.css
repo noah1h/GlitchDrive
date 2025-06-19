@@ -33,7 +33,7 @@ body {
   box-sizing: border-box;
   font-family: 'Space Mono', monospace;
 }
-section, header, footer {
+section, header, footer, main {
   overflow: hidden;
 }
 html a {
@@ -97,14 +97,15 @@ html a {
   padding: 0 1rem;
 }
 
-.gym-logo {
+.logo {
   letter-spacing: 1px;
   font-size: 30px;
   font-weight: 900;
-  color: var(--text-color);
+  color: var(--primary-color);
+  transition: color 0.3s ease;
 }
-.gym-logo:hover {
-  color: var(--text-color);
+.logo:hover {
+  color: var(--secondary-color);
 }
 
 .nav-links-container {
@@ -156,9 +157,6 @@ html a {
   transform: translateX(-50%);
 }
 
-.nav-links:hover {
-  transform: translateY(-2px);
-}
 
 .nav-links:hover::after {
   width: 100%;
@@ -664,4 +662,14 @@ border-radius: 100%;
 .view-all-button:hover {
   color: var(--background-color);
   transform: translateY(-5px);
+}
+/* Hearted page */
+
+#hearted {
+  padding-top: 80px;
+  padding-bottom: 50px;
+  height: auto;
+}
+.hearted-total {
+  color: var(--secondary-color);
 }

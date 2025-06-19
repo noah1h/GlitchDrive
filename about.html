@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="GlitchDrive - Your trusted destination for buying and selling quality cars.">
+  <title>GlitchDrive</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Barlow:wght@400;700&display=swap" rel="stylesheet" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+        crossorigin="anonymous" />
+
+  <!-- AOS.js -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+
+  <!--Swiper.js-->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/about.css" />
+</head>
+
+  <body>
+
+    <div id="preloader">
+      <div class="spinner-wrapper">
+        <svg class="custom-spinner" width="40" height="40" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><style>.spinner_jCIR{animation:spinner_B8Vq .9s linear infinite;animation-delay:-.9s}.spinner_upm8{animation-delay:-.8s}.spinner_2eL5{animation-delay:-.7s}.spinner_Rp9l{animation-delay:-.6s}.spinner_dy3W{animation-delay:-.5s}@keyframes spinner_B8Vq{0%,66.66%{animation-timing-function:cubic-bezier(0.36,.61,.3,.98);y:6px;height:12px}33.33%{animation-timing-function:cubic-bezier(0.36,.61,.3,.98);y:1px;height:22px}}</style><rect class="spinner_jCIR" x="1" y="6" width="2.8" height="12"/><rect class="spinner_jCIR spinner_upm8" x="5.8" y="6" width="2.8" height="12"/><rect class="spinner_jCIR spinner_2eL5" x="10.6" y="6" width="2.8" height="12"/><rect class="spinner_jCIR spinner_Rp9l" x="15.4" y="6" width="2.8" height="12"/><rect class="spinner_jCIR spinner_dy3W" x="20.2" y="6" width="2.8" height="12"/></svg>
+      </div>
+    </div>
+
+    <div class="sidebar d-lg-none d-md-block">
+      <div class="sidebar-links">
+        <a class="sidebar-link scramble-text" data-text="Home" href="index.html">Home</a>
+        <a class="sidebar-link scramble-text" data-text="About us" href="about.html">About us</a>
+        <a class="sidebar-link scramble-text" data-text="Inventory" href="inventory.html">Inventory</a>
+        <a class="sidebar-link scramble-text" data-text="Sell/Trade" href="#">Sell/Trade</a>
+        <div class="container-fluid px-0 pt-3">
+          <div class="row gx-1"> 
+            <div class="col-9 ps-1"> 
+              <a class="sidebar-glitch-button scramble-text" data-text="Join Now" href="#memberships">
+                Join Now
+              </a>
+            </div>
+            
+            <div class="col-3 pe-1">
+              <div class="hearted-items-container position-relative" data-count="0">
+                <a href="hearted.html">
+                  <button class="hearted-items sidebar-heart">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="nav-heart-svg">
+                      <path d="m11.645 20.91-.007-.003-.022-.012a15.247 15.247 0 0 1-.383-.218 25.18 25.18 0 0 1-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0 1 12 5.052 5.5 5.5 0 0 1 16.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 0 1-4.244 3.17 15.247 15.247 0 0 1-.383.219l-.022.012-.007.004-.003.001a.752.752 0 0 1-.704 0l-.003-.001Z"/>
+                    </svg>
+                  </button>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        
+      </div>
+    </div>
+
+    <nav data-aos="fade-down" data-aos-duration="600" id="nav">
+      <div class="container-fluid nav-container">
+        <a href="index.html" class="logo">GlitchDrive</a>
+
+        <div class="nav-links-container d-none d-lg-flex">
+          <a class="nav-links scramble-text" data-text="Home" href="index.html">Home</a>
+          <a class="active scramble-text" data-text="About us" href="about.html">About us</a>
+          <a class="nav-links scramble-text" data-text="Inventory" href="inventory.html">Inventory</a>
+          <a class="nav-links scramble-text" data-text="Sell/Trade" href="#">Sell/Trade</a>
+          <a class="glitch-button scramble-text" data-text="Contact us" href="#memberships">
+            <span>Contact us</span></a>
+            <div class="hearted-items-container">
+              <a href="hearted.html">
+            <button class="hearted-items">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6 nav-heart-svg">
+                <path d="m11.645 20.91-.007-.003-.022-.012a15.247 15.247 0 0 1-.383-.218 25.18 25.18 0 0 1-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0 1 12 5.052 5.5 5.5 0 0 1 16.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 0 1-4.244 3.17 15.247 15.247 0 0 1-.383.219l-.022.012-.007.004-.003.001a.752.752 0 0 1-.704 0l-.003-.001Z" />
+              </svg>
+            </button>
+          </a>
+          </div>
+        </div>
+        
+
+        <svg
+          class="hamburger-menu d-lg-none bi bi-list"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="white"
+          viewBox="0 0 16 16"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"
+          />
+        </svg>
+      </div>
+    </nav>
+
+    <main id="about">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-7 col-md-12">
+            <div class="title about-title scramble-auto">What is GlitchDrive?</div>
+          <div class="desc pt-4 about-desc" data-aos="fade-right">
+            <span class="highlight">
+              GlitchDrive is a next-gen car marketplace built for a new generation of digital explorers.</span>
+              <br>
+            We’ve left behind the outdated, bloated dealership websites and reimagined the buying experience from the ground up. From the moment the page loads, you’re dropped into a sleek, glitch-inspired interface that feels more like navigating a futuristic terminal than browsing a typical online store. Monospace fonts, sharp animations, and dynamic effects bring the experience to life—blending style with function for a look that speaks directly to tech-lovers and modern buyers.
+            <br>
+            <br>
+            <span class="highlight">But GlitchDrive isn’t just about aesthetics—it’s built for speed, precision, and control.</span>
+            <br>
+            Our system is optimized to help you find your ideal car faster and easier than ever. Every listing is clean, accessible, and instantly searchable, with powerful filters that cut through the noise. Whether you’re a first-time buyer looking for reliability or a seasoned enthusiast chasing performance, GlitchDrive makes the journey intuitive, efficient, and even a little addictive. It’s not just a marketplace—it’s a machine learning how to match people with the rides they dream about.
+            
+            
+            
+            </div>
+          </div>
+          <div class="col-lg-5 col-md-12 pt-5">
+            <div class="desc about-desc" data-aos="fade-left">
+              <span class="highlight">GlitchDrive doesn’t just look different — it feels different. </span>
+              <br>
+              Every interaction is smooth, every transition intentional, creating a seamless experience from the moment you land. Subtle glitch effects, terminal-style text, and precise motion combine to give the platform its unique edge. It’s not just styled to look futuristic — it’s engineered to feel like you’re navigating something smarter, faster, and more refined than anything you’ve used before.
+              <br>
+              <br>
+             <span class="highlight"> This isn’t just about finding a car — it’s about how you find it.</span>
+             <br>
+              GlitchDrive is built for the modern driver: someone who values design, speed, and clarity in everything they use. The interface keeps distractions out of the way and puts the focus entirely on the machines. Whether you're searching, comparing, or just browsing, the experience is intuitive, immersive, and designed to match the sophistication of the vehicles themselves.
+              
+              
+              
+              
+              </div>
+          </div>
+        </div>
+      
+    </div>
+
+    </main>
+    <section id="mission">
+      <div class="container">
+      <div class="title mission-title scramble-auto">Our mission:</div>
+      <div data-aos="fade-right" class="desc mission-desc pt-3">At GlitchDrive, our mission is to redefine how people discover cars in the digital age. We believe the online car-buying experience should be fast, intuitive, and visually engaging — not stuck in the past with clunky interfaces, endless pop-ups, and lifeless search pages. In a world where everything else has evolved, car platforms should too. Drivers deserve a space that feels just as advanced as the vehicles they’re looking for.
+<br>
+<br>
+        That’s why we built a platform that feels like a high-performance machine: sleek, responsive, and engineered with intention. Every detail — from the glitch-style transitions and dynamic type to the clean, terminal-inspired layout — is crafted to give users an experience that feels futuristic rather than frustrating. We’re here to bridge the gap between technology and automotive culture, combining aesthetics and performance to deliver a smarter, smoother way to connect with the machines that move us. At GlitchDrive, every scroll should feel like acceleration — fast, focused, and satisfying.
+        
+        </div>
+    </div>
+    </section>
+    <section id="clientFeedback">
+      <div class="container">
+      <div class="title feedback-title scramble-auto">Our Clients Feedback:</div>
+      <div class="row pt-5 g-5">
+        <div class="col-lg-4 col-md-6 justify-content-center align-items-center">
+          <div class="feedback-card-container" data-aos="fade-right">
+            <div class="feedback-card d-flex flex-column p-4">
+              <div>
+                <div class="client-name fw-bold">Lena W.</div>
+                <div class="client-feedback pt-3">
+                  It’s the first car site that actually feels fun to use. I didn’t just find a car — I enjoyed the process.
+                </div>
+              </div>
+              <div class="client-country mt-auto text-muted">Berlin, Germany</div>
+            </div>
+            
+        </div>
+        </div>
+        <div class="col-lg-4 col-md-6 justify-content-center align-items-center">
+          <div class="feedback-card-container" data-aos="fade-up">
+            <div class="feedback-card d-flex flex-column p-4">
+              <div>
+                <div class="client-name fw-bold">Jordan M.</div>
+                <div class="client-feedback pt-3">
+                  Clean, fast, glitchy in the best way. GlitchDrive makes other car websites look like they were built in 2003.
+                </div>
+              </div>
+              <div class="client-country mt-auto text-muted">Rome, Italy</div>
+            </div>
+            
+        </div>
+        </div>
+        <div class="col-lg-4 col-md-6 d-flex justify-content-center align-items-center">
+          <div class="feedback-card-container" data-aos="fade-left">
+            <div class="feedback-card d-flex flex-column p-4">
+              <div>
+                <div class="client-name fw-bold">Darius R.</div>
+                <div class="client-feedback pt-3">
+                  Every page transition is so smooth it feels like driving through a digital highway.
+                </div>
+              </div>
+              <div class="client-country mt-auto text-muted">Toronto, Canada</div>
+            </div>
+            
+        </div>
+        </div>
+      </div>
+    </div>
+    </section>
+
+ <!-- jQuery-->
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+ <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+   
+ 
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+<script src="js/script.js"></script>
+<script>
+ AOS.init();
+</script>
+</body>
+</html>
