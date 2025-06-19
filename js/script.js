@@ -112,9 +112,18 @@ const storeSwiper = new Swiper('#store .swiper', {
     draggable: true,
   },
   breakpoints: {
-    576: { slidesPerView: 2 },
-    768: { slidesPerView: 3 },
-    1024: { slidesPerView: 4 },
+  576: {
+    slidesPerView: 2,
+  },
+  768: {
+    slidesPerView: 3,
+  },
+  1024: {
+    slidesPerView: 4,
+  },
+  1600: {
+    slidesPerView: 5,
+  },
   },
 });
 
