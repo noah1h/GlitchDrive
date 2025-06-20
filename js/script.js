@@ -173,43 +173,7 @@ if (localStorage.getItem("theme") === "light") {
 }
 updateToggleText();
 
-$(document).ready(function () {
-  gsap.registerPlugin(ScrollTrigger);
 
-  const footer = document.querySelector("#footer");
-
-  // Get the section just before #footer
-  const previousSection = footer.previousElementSibling;
-
-  // Skip if nothing found (safety)
-  if (!previousSection) return;
-
-  // Get dynamic height of footer
-  const footerHeight = footer.offsetHeight;
-
-  // Create scroll wipe effect
-  gsap.fromTo(
-    footer,
-    { y: footerHeight },
-    {
-      y: 0,
-      ease: "none",
-      scrollTrigger: {
-        trigger: previousSection,
-        start: "bottom bottom",
-        end: `+=${footerHeight}`,
-        scrub: true
-      }
-    }
-  );
-
-  // Optional: refresh on resize for dynamic height
-  $(window).on("resize", function () {
-    ScrollTrigger.refresh();
-  });
-
-  ScrollTrigger.refresh();
-});
 
 
 
