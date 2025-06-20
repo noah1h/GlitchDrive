@@ -19,7 +19,7 @@ $(document).ready(function() {
       $sidebar.stop(true, true).slideDown();
     }
   });
-
+});
 
 // Scramble text effect
 const chars = "!@#$%^&*()_+1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -119,8 +119,6 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-
-
 const toggleButtons = document.querySelectorAll("#theme-toggle, #side-theme-toggle");
 
 // Scramble function (reuse your original one)
@@ -174,8 +172,13 @@ if (localStorage.getItem("theme") === "light") {
 updateToggleText();
 
 
+const faqItems = document.querySelectorAll('.faq-item');
 
-
+  faqItems.forEach(item => {
+    item.querySelector('.faq-question').addEventListener('click', () => {
+      item.classList.toggle('active');
+    });
+  });
 
 // Initialize Swiper for store page
 const storeSwiper = new Swiper('.swiper', {
@@ -689,5 +692,4 @@ document.querySelector('.contact-form').addEventListener('submit', function (e) 
   }
   
   
-});
 });
