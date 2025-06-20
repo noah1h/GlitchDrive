@@ -19,7 +19,7 @@ $(document).ready(function() {
       $sidebar.stop(true, true).slideDown();
     }
   });
-});
+
 
 // Scramble text effect
 const chars = "!@#$%^&*()_+1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -119,6 +119,8 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
+
+
 const toggleButtons = document.querySelectorAll("#theme-toggle, #side-theme-toggle");
 
 // Scramble function (reuse your original one)
@@ -170,6 +172,44 @@ if (localStorage.getItem("theme") === "light") {
   document.body.classList.add("light-mode");
 }
 updateToggleText();
+
+$(document).ready(function () {
+  gsap.registerPlugin(ScrollTrigger);
+
+  const footer = document.querySelector("#footer");
+
+  // Get the section just before #footer
+  const previousSection = footer.previousElementSibling;
+
+  // Skip if nothing found (safety)
+  if (!previousSection) return;
+
+  // Get dynamic height of footer
+  const footerHeight = footer.offsetHeight;
+
+  // Create scroll wipe effect
+  gsap.fromTo(
+    footer,
+    { y: footerHeight },
+    {
+      y: 0,
+      ease: "none",
+      scrollTrigger: {
+        trigger: previousSection,
+        start: "bottom bottom",
+        end: `+=${footerHeight}`,
+        scrub: true
+      }
+    }
+  );
+
+  // Optional: refresh on resize for dynamic height
+  $(window).on("resize", function () {
+    ScrollTrigger.refresh();
+  });
+
+  ScrollTrigger.refresh();
+});
 
 
 
@@ -685,4 +725,5 @@ document.querySelector('.contact-form').addEventListener('submit', function (e) 
   }
   
   
+});
 });
