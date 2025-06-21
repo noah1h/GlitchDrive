@@ -28,9 +28,9 @@ Folder Structure
 -----------------------------------------------------
 /css                  → Production styles (linked to HTML)
   └── style.css (Customize the theme's color palette by modifying the :root and .light-theme CSS variables.)
-  
       about.css
       car-details.css
+      login.css
 
 /js                   → JavaScript files (linked to HTML)
   └── script.js
@@ -45,6 +45,9 @@ about.html            → About the dealership
 car-details.html      → Dynamic car detail template  
 hearted.html          → Favorited cars  
 inventory.html        → Full car listing  
+buy-item.html        → Full car listing  
+login.html        → Design only (Not working)
+register.html        → Design only (Not working)  
 README.txt            → You're reading it!
 
 -----------------------------------------------------
@@ -77,7 +80,6 @@ Dependencies
 -----------------------------------------------------
 Image Credits
 -----------------------------------------------------
-Images used in the live preview are for demo purposes only.
 
 Some images are sourced from:
 - [Freepik.com](https://www.freepik.com) – Authors: Mateus Andre, graphicforest  

@@ -377,7 +377,9 @@ function updateHeartedItemsDisplay() {
                       </button>
                     </div>
                     <div class="col-8">
-                      <button class="buy-button scramble-text" data-text="Buy Now">Buy now</button>
+                      <a href="buy-item.html">
+                        <button class="buy-button scramble-text" data-text="Buy Now">Buy now</button>
+                      </a>
                     </div>
                   </div>
                 </div>
@@ -584,6 +586,8 @@ $(document).ready(function() {
       $('.engine-desc').html(car.engineDesc);
       $('#moreDetails .details-desc').html(car.interiorDesc);
       
+      $('.buy-car-name').text(car.title);
+    $('.buy-car-price').text('$' + car.price);
       // Update images
       $('.details-img').css('background-image', `url('${car.detailsImg}')`);
       $('.engine-img').css('background-image', `url('${car.engineImg}')`);
@@ -594,7 +598,6 @@ $(document).ready(function() {
     }
   }
 });
-
 
 
 // Form validation
@@ -693,3 +696,5 @@ document.querySelector('.contact-form').addEventListener('submit', function (e) 
   
   
 });
+
+
