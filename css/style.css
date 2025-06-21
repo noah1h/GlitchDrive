@@ -583,54 +583,54 @@ body.light-mode .car-bg-circle {
 
 
 .car-1 {
-  background-image: url('../imgs/cars/Porsche.jpg');
+  background-image: url('https://placehold.co/600x400?text=Car+Image');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
   transition: all 0.3s ease;
 }
 .car-1:hover {
-  background-image: url('../imgs/cars/interior/porsche-interior.jpg');
+  background-image: url('https://placehold.co/600x400?text=Car+Interior');
 }
 .car-2 {
-  background-image: url('../imgs/cars/BMW.jpg');
+  background-image: url('https://placehold.co/600x400?text=Car+Image');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
   transition: all 0.3s ease;
 }
 .car-2:hover {
-  background-image: url('../imgs/cars/interior/bmw-interior.jpg');
+  background-image: url('https://placehold.co/600x400?text=Car+Interior');
 }
 .car-3 {
-  background-image: url('../imgs/cars/Mercedes.jpg');
+  background-image: url('https://placehold.co/600x400?text=Car+Image');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
   transition: all 0.3s ease;
 }
 .car-3:hover {
-  background-image: url('../imgs/cars/interior/mercedes-interior.jpg');
+  background-image: url('https://placehold.co/600x400?text=Car+Interior');
 }
 .car-4 {
-  background-image: url('../imgs/cars/Audi.jpg');
+  background-image: url('https://placehold.co/600x400?text=Car+Image');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
   transition: all 0.3s ease;
 }
 .car-4:hover {
-  background-image: url('../imgs/cars/interior/audi-interior.jpg');
+  background-image: url('https://placehold.co/600x400?text=Car+Interior');
 }
 .car-5 {
-  background-image: url('../imgs/cars/G-class.jpg');
+  background-image: url('https://placehold.co/600x400?text=Car+Image');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
   transition: all 0.3s ease;
 }
 .car-5:hover {
-  background-image: url('../imgs/cars/interior/g-class-interior.jpg');
+  background-image: url('https://placehold.co/600x400?text=Car+Interior');
 }
 .car-name {
   text-align: start;

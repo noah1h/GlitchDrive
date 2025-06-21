@@ -7,7 +7,7 @@
 .details-img {
   width: 100%;
   height: 400px;
-  background-image: url('../imgs/cars/Porsche.jpg');
+  background-image: url('https://placehold.co/600x400?text=Car+Image');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -25,7 +25,7 @@
 .engine-img {
   width: 100%;
   height: 400px;
-  background-image: url('../imgs/engine.jpg');
+  background-image: url('https://placehold.co/600x400?text=Car+Engine');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -38,7 +38,7 @@
 .more-details-img {
   width: 100%;
   height: 400px;
-  background-image: url('../imgs/cars/Porsche-2.jpg');
+  background-image: url('https://placehold.co/600x400?text=Car+Interior');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
