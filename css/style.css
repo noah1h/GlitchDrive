@@ -843,6 +843,12 @@ body.light-mode .info-svg {
   align-items: center;
   flex-direction: column;
 }
+.contact-form-section input, .contact-form-section textarea {
+  font-family: 'Inter', sans-serif;
+}
+.contact-form-section input::placeholder, .contact-form-section textarea::placeholder {
+  font-family: 'Space Mono', sans-serif;
+}
 @media(max-width:767px) {
   .contact-form-section {
     padding: 10px 10px;
@@ -964,7 +970,7 @@ body.light-mode #footer *{
   margin-right: 20px;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 967px) {
   .footer-right {
     padding-top: 30px;
   }

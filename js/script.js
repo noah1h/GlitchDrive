@@ -192,11 +192,8 @@ const storeSwiper = new Swiper('.swiper', {
     draggable: true,
   },
   breakpoints: {
-  576: {
-    slidesPerView: 2,
-  },
   768: {
-    slidesPerView: 3,
+    slidesPerView: 2,
   },
   1024: {
     slidesPerView: 4,
@@ -601,7 +598,7 @@ $(document).ready(function() {
 
 
 // Form validation
-document.querySelector('.contact-form').addEventListener('submit', function (e) {
+document.querySelector('.contact-form').addEventListener('submit', async function (e) {
   e.preventDefault();
 
   const firstName = document.querySelector('.first-name-input');
@@ -624,6 +621,35 @@ document.querySelector('.contact-form').addEventListener('submit', function (e) 
     const errorDiv = input.parentElement.querySelector('.error-message');
     errorDiv.textContent = '';
     input.style.border = '';
+  }
+
+  // Helper to show success/error messages
+  function showMessage(message, type) {
+    // Remove existing messages
+    const existingAlert = document.querySelector('.form-message');
+    if (existingAlert) existingAlert.remove();
+    
+    // Create new message
+    const alertDiv = document.createElement('div');
+    alertDiv.className = 'form-message';
+    alertDiv.style.marginTop = '20px';
+    alertDiv.style.padding = '15px';
+    alertDiv.style.borderRadius = '5px';
+    alertDiv.style.backgroundColor = type === 'success' ? '#d4edda' : '#f8d7da';
+    alertDiv.style.color = type === 'success' ? '#155724' : '#721c24';
+    alertDiv.style.border = `1px solid ${type === 'success' ? '#c3e6cb' : '#f5c6cb'}`;
+    alertDiv.textContent = message;
+    
+    document.querySelector('.contact-form').appendChild(alertDiv);
+    
+    // Remove success message after 5 seconds
+    if (type === 'success') {
+      setTimeout(() => {
+        if (alertDiv.parentNode) {
+          alertDiv.remove();
+        }
+      }, 5000);
+    }
   }
 
   let isValid = true;
@@ -683,18 +709,60 @@ document.querySelector('.contact-form').addEventListener('submit', function (e) 
       </svg>
     `;
     submitBtn.style.filter = 'grayscale(100%)';
-
     submitBtn.disabled = true;
-  
-    // After 2 seconds, restore
-    setTimeout(() => {
-      btnText.textContent = 'Submit';
-      submitBtn.disabled = false;
-     submitBtn.style.filter = 'grayscale(0)';
-    }, 1000);
-  }
-  
-  
-});
 
+    // Prepare form data for sending
+    const formData = {
+      firstName: firstName.value.trim(),
+      lastName: lastName.value.trim(),
+      email: email.value.trim(),
+      subject: subject.value.trim(),
+      message: message.value.trim()
+    };
+
+    try {
+      // Send email via PHP backend
+      const response = await fetch('contact_handler.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData)
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        // Success - reset form and show success message
+        document.querySelector('.contact-form').reset();
+        showMessage('Thank you! Your message has been sent successfully.', 'success');
+        
+        // Reset button immediately on success
+        btnText.textContent = 'Submit';
+        submitBtn.disabled = false;
+        submitBtn.style.filter = 'grayscale(0)';
+      } else {
+        // Error - show error message
+        showMessage(result.message || 'Failed to send message. Please try again.', 'error');
+        
+        // Reset button after 1 second on error
+        setTimeout(() => {
+          btnText.textContent = 'Submit';
+          submitBtn.disabled = false;
+          submitBtn.style.filter = 'grayscale(0)';
+        }, 1000);
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      showMessage('Network error. Please check your connection and try again.', 'error');
+      
+      // Reset button after 1 second on network error
+      setTimeout(() => {
+        btnText.textContent = 'Submit';
+        submitBtn.disabled = false;
+        submitBtn.style.filter = 'grayscale(0)';
+      }, 1000);
+    }
+  }
+});
 
