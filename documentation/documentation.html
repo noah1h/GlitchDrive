@@ -462,6 +462,7 @@
           <a href="#colors" class="nav-link">Colors & Variables</a>
           <a href="#animations" class="nav-link">Animations</a>
           <a href="#favorites" class="nav-link">Favorites System</a>
+          <a href="#blogs" class="nav-link">Blogs system</a>
         </nav>
       </div>
 
@@ -588,6 +589,8 @@ npx http-server
 ├── <span class="file">inventory.html</span>             # Car inventory page <br>
 ├── <span class="file">car-details.html</span>           # Individual car details <br>
 ├── <span class="file">hearted.html</span>               # Favorites/hearted cars <br>
+├── <span class="file">blogs.html</span>               # Blogs page <br>
+├── <span class="file">blogs-article.html</span>               # Blog articles <br>
 ├── <span class="file">login.html</span>                 # User login page <br>
 ├── <span class="file">register.html</span>              # User registration <br>
 ├── <span class="file">buy-item.html</span>              # Purchase page <br>
@@ -865,7 +868,281 @@ function updateHeartedContainerDisplay() {
 }
           </pre>
       </section>
-
+      <section id="blogs">
+          <h2>📝 Blog System</h2>
+          
+          <p>GlitchDrive includes a fully functional blog system that allows you to share automotive content, tips, and news with your visitors. The blog is built with a dynamic article loading system that keeps content organized and easy to maintain.</p>
+          
+          <h3>Blog Structure</h3>
+          <p>The blog system consists of three main components:</p>
+          
+          <div class="feature-grid">
+            <div class="feature-card">
+              <h4>📄 blogs.html</h4>
+              <p>Main blog listing page that displays all available articles with preview cards, titles, descriptions, and section summaries.</p>
+            </div>
+            
+            <div class="feature-card">
+              <h4>📖 blogs-article.html</h4>
+              <p>Dynamic article display page that loads content based on URL parameters. All articles are rendered through this single template.</p>
+            </div>
+            
+            <div class="feature-card">
+              <h4>⚙️ blogs.js</h4>
+              <p>JavaScript file that handles article routing, content loading, and dynamic HTML generation for blog posts.</p>
+            </div>
+          </div>
+        
+          <h3>How It Works</h3>
+          <div class="steps">
+            <div class="step">
+              <h4>Article Navigation</h4>
+              <p>When users click "View article" on the blog listing page, JavaScript captures the article ID and redirects to the article page with a query parameter:</p>
+              <pre>// Redirect buttons with data-article to the article page
+        $('.blog-button').click(function(e){
+          e.preventDefault();
+          const articleId = $(this).data('article');
+          window.location.href = 'blogs-article.html?article=' + articleId;
+        });</pre>
+            </div>
+            
+            <div class="step">
+              <h4>Dynamic Content Loading</h4>
+              <p>The article page reads the URL parameter and loads the corresponding content from the JavaScript object:</p>
+              <pre>$(document).ready(function(){
+          const params = new URLSearchParams(window.location.search);
+          const article = params.get('article');
+        
+          if(article === 'suv-vs-sedan'){
+            $('#article-title').text('SUV vs Sedan: Which Is Better?');
+            $('#article-desc').text('Choosing between an SUV and sedan...');
+            $('#article-content').html(`...`);
+          }
+        });</pre>
+            </div>
+            
+            <div class="step">
+              <h4>Article Structure</h4>
+              <p>Each article is organized into sections with consistent styling:</p>
+              <pre>&lt;div class="article-section"&gt;
+          &lt;li class="blog-section-title"&gt;Section Title&lt;/li&gt;
+          &lt;div class="blog-section-text"&gt;
+            Section content goes here with paragraphs,
+            comparisons, and detailed information.
+          &lt;/div&gt;
+        &lt;/div&gt;</pre>
+            </div>
+          </div>
+        
+          <h3>Adding New Articles</h3>
+          
+          <h4>Step 1: Add Article Card to blogs.html</h4>
+          <p>Create a new blog card in the main blog listing page:</p>
+          <pre>&lt;div class="blog-border"&gt;
+          &lt;div class="blog"&gt;
+            &lt;div class="row"&gt;
+              &lt;div class="col-lg-6 col-sm-12"&gt;
+                &lt;img class="blog-img" src="https://placehold.co/600x400?text=Blog+Image" alt=""&gt;
+              &lt;/div&gt;
+              &lt;div class="col-lg-6 col-sm-12"&gt;
+                &lt;div class="blog-text"&gt;
+                  &lt;div class="blog-title"&gt;Your Article Title&lt;/div&gt;
+                  &lt;div class="blog-desc"&gt;Brief description of your article&lt;/div&gt;
+                  
+                  &lt;div class="row"&gt;
+                    &lt;div class="col-lg-8 col-md-12"&gt;
+                      &lt;div class="blog-desc"&gt;
+                        The sections in this article:
+                        &lt;ul class="pt-3"&gt;
+                          &lt;li&gt;Section 1&lt;/li&gt;
+                          &lt;li&gt;Section 2&lt;/li&gt;
+                          &lt;li&gt;Section 3&lt;/li&gt;
+                        &lt;/ul&gt;
+                      &lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;div class="col-lg-4 col-md-12"&gt;
+                      &lt;a href="blogs-article.html" class="blog-button scramble-text" 
+                         data-article="your-article-id" data-text="View article"&gt;View article&lt;/a&gt;
+                    &lt;/div&gt;
+                  &lt;/div&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;</pre>
+        
+          <h4>Step 2: Add Article Content to blogs.js</h4>
+          <p>Add a new conditional block in the <code>$(document).ready()</code> function:</p>
+          <pre>else if(article === 'your-article-id'){
+          $('#article-title').text('Your Article Title');
+          $('#article-desc').text('Your article description that provides context.');
+          
+          $('#article-content').html(`
+        &lt;div class="article-section"&gt;
+          &lt;li class="blog-section-title"&gt;First Section&lt;/li&gt;
+          &lt;div class="blog-section-text"&gt;
+            Your first section content here.
+            &lt;br&gt;&lt;br&gt;
+            You can add multiple paragraphs and formatting.
+          &lt;/div&gt;
+        &lt;/div&gt;
+        
+        &lt;div class="article-section"&gt;
+          &lt;li class="blog-section-title"&gt;Second Section&lt;/li&gt;
+          &lt;div class="blog-section-text"&gt;
+            Your second section content.
+          &lt;/div&gt;
+        &lt;/div&gt;
+        
+        &lt;div class="article-section"&gt;
+          &lt;li class="blog-section-title"&gt;Conclusion&lt;/li&gt;
+          &lt;div class="blog-section-text"&gt;
+            Final thoughts and recommendations.
+            &lt;br&gt;&lt;br&gt;
+            You can use &lt;strong&gt;bold text&lt;/strong&gt; and other HTML formatting.
+          &lt;/div&gt;
+        &lt;/div&gt;
+          `);
+        }</pre>
+        
+          <h3>Existing Articles</h3>
+          
+          <div class="table-responsive">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>Article ID</th>
+                  <th>Title</th>
+                  <th>Sections</th>
+                  <th>Topic</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>suv-vs-sedan</code></td>
+                  <td>SUV vs Sedan: Which Is Better?</td>
+                  <td>5 sections + verdict</td>
+                  <td>Vehicle comparison guide</td>
+                </tr>
+                <tr>
+                  <td><code>car-maintenance</code></td>
+                  <td>Car Maintenance & Ownership</td>
+                  <td>5 problems + tips</td>
+                  <td>Maintenance troubleshooting</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        
+          <h3>Blog Customization</h3>
+          
+          <h4>Changing Blog Images</h4>
+          <p>Replace the placeholder images with your own automotive images:</p>
+          <pre>&lt;img class="blog-img" src="imgs/blog-suv-sedan.jpg" alt="SUV vs Sedan"&gt;</pre>
+          
+          <h4>Article Formatting Tips</h4>
+          <ul>
+            <li><strong>Use clear section titles:</strong> Make it easy for readers to scan content</li>
+            <li><strong>Add comparisons:</strong> Use "Best for X vs Best for Y" format for clarity</li>
+            <li><strong>Include spacing:</strong> Use <code>&lt;br&gt;&lt;br&gt;</code> between paragraphs for readability</li>
+            <li><strong>Bold key points:</strong> Highlight important information with <code>&lt;strong&gt;</code> tags</li>
+            <li><strong>Keep it scannable:</strong> Break long paragraphs into shorter, digestible chunks</li>
+          </ul>
+        
+          <h4>SEO Best Practices</h4>
+          <div class="alert-info">
+            <strong>🔍 Optimize Your Blog Articles:</strong>
+            <ul>
+              <li>Use descriptive article IDs (e.g., "electric-vs-hybrid-cars")</li>
+              <li>Write compelling article descriptions (150-160 characters)</li>
+              <li>Include relevant keywords in titles and content</li>
+              <li>Add meaningful section headings</li>
+              <li>Keep URLs clean and readable</li>
+            </ul>
+          </div>
+        
+          <h3>Advanced Customization</h3>
+          
+          <h4>Adding Featured Images</h4>
+          <p>Include images within article content for visual engagement:</p>
+          <pre>&lt;div class="article-section"&gt;
+          &lt;li class="blog-section-title"&gt;Visual Comparison&lt;/li&gt;
+          &lt;div class="blog-section-text"&gt;
+            &lt;img src="imgs/comparison-chart.jpg" alt="Comparison" 
+                 style="max-width: 100%; border-radius: 8px; margin: 20px 0;"&gt;
+            &lt;br&gt;
+            Explanation of the comparison image above.
+          &lt;/div&gt;
+        &lt;/div&gt;</pre>
+        
+          <h4>Adding Call-to-Actions</h4>
+          <p>Encourage user engagement at the end of articles:</p>
+          <pre>&lt;div class="article-section"&gt;
+          &lt;li class="blog-section-title"&gt;Ready to Find Your Car?&lt;/li&gt;
+          &lt;div class="blog-section-text"&gt;
+            Now that you know the differences, browse our 
+            &lt;a href="inventory.html" style="color: var(--accent-color-2);"&gt;
+              inventory
+            &lt;/a&gt; to find the perfect vehicle for your needs.
+          &lt;/div&gt;
+        &lt;/div&gt;</pre>
+        
+          <h4>Creating Article Categories</h4>
+          <p>Organize articles by adding category tags to blog cards:</p>
+          <pre>&lt;div class="blog-text"&gt;
+          &lt;span class="badge bg-success mb-2"&gt;Buying Guide&lt;/span&gt;
+          &lt;div class="blog-title"&gt;Article Title&lt;/div&gt;
+          ...
+        &lt;/div&gt;</pre>
+        
+          <h3>Blog Maintenance</h3>
+          
+          <div class="steps">
+            <div class="step">
+              <h4>Regular Updates</h4>
+              <p>Keep your blog fresh and relevant:</p>
+              <ul>
+                <li>Add 2-4 new articles per month</li>
+                <li>Update existing articles with new information</li>
+                <li>Remove outdated content or mark as archived</li>
+                <li>Monitor which articles get the most engagement</li>
+              </ul>
+            </div>
+            
+            <div class="step">
+              <h4>Content Planning</h4>
+              <p>Plan your blog content strategy:</p>
+              <ul>
+                <li><strong>Buying Guides:</strong> Help customers make informed decisions</li>
+                <li><strong>Maintenance Tips:</strong> Position yourself as an expert</li>
+                <li><strong>Industry News:</strong> Keep visitors informed about trends</li>
+                <li><strong>Vehicle Reviews:</strong> Showcase inventory with detailed reviews</li>
+              </ul>
+            </div>
+          </div>
+        
+          <div class="alert-warning">
+            <strong>⚠️ Important Notes:</strong>
+            <ul>
+              <li>Always use unique article IDs to prevent conflicts</li>
+              <li>Test new articles locally before publishing</li>
+              <li>Keep article content within reasonable length (800-1500 words)</li>
+              <li>Ensure all internal links point to existing pages</li>
+              <li>Maintain consistent formatting across all articles</li>
+            </ul>
+          </div>
+        
+          <h3>Future Blog Enhancements</h3>
+          <p>Consider these potential upgrades for your blog system:</p>
+          <ul>
+            <li><strong>CMS Integration:</strong> Connect to WordPress or Contentful for easier content management</li>
+            <li><strong>Search Functionality:</strong> Add article search with filtering options</li>
+            <li><strong>Related Articles:</strong> Show similar content at the end of each article</li>
+            <li><strong>Social Sharing:</strong> Add share buttons for Facebook, Twitter, LinkedIn</li>
+            <li><strong>Comments System:</strong> Enable Disqus or similar commenting platform</li>
+            <li><strong>Reading Time:</strong> Display estimated reading time for each article</li>
+          </ul>
+      </section>
       <section id="contact-form" class="section">
         <h2>📧 Contact Form Setup</h2>
         
@@ -1245,7 +1522,7 @@ document.querySelector('.contact-form').addEventListener('submit', function(e) {
           </ul>
         </div>
       </section>
-
+      
       <section id="credits" class="section">
         <h2>🏆 Credits & Attributions</h2>
         
