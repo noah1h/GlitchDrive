@@ -1256,3 +1256,121 @@ body.light-mode #footer *{
     grid-template-columns: 1fr;
   }
 }
+
+
+#blogs {
+  padding-top: 120px;
+}
+.blog-border {
+  width: 100%;
+  min-height: 300px;
+  background-color: var(--border-color);
+  padding: 2px;
+  clip-path: var(--shape-mid);
+  margin-bottom: 40px;
+}
+
+.blog {
+  width: 100%;
+  min-height: inherit;
+  clip-path: var(--shape-mid);
+  background-color: var(--background-color);
+  padding: 20px;
+  display: flex;
+  align-items: stretch;  
+}
+.blog-img {
+  width: 100%;
+  clip-path: var(--shape-mid);
+  object-fit: cover;
+}
+.blog > .row {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;    
+}
+
+.blog .col-lg-6 {
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem;      
+}
+
+.blog .col-lg-6:first-child .blog-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;    
+  display: block;
+}
+
+.blog .col-lg-6:last-child {
+  justify-content: center; 
+}
+
+.blog-text {
+  display: flex;
+  flex-direction: column;
+  height: 100%;           
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.blog-title {
+  color: var(--text-color);
+  font-weight: 800;
+  font-size: 19px;
+  text-align: left;     
+  margin-bottom: .5rem;
+}
+
+.blog-desc {
+  color: var(--desc-color);
+  margin-bottom: .5rem;
+}
+
+.blog-text > .row {
+  margin-top: 0;    
+  align-items: end;
+}
+
+.blog-button {
+  padding: 10px 15px;
+  background-color: var(--secondary-color);
+  clip-path: var(--shape-mid);
+  margin-top: 0;      
+  align-self: flex-end;  
+  white-space: nowrap;
+  display: inline-flex;
+  justify-content: center;
+  color: var(--background-color);
+}
+.blog-button:hover {
+  color: var(--background-color);
+}
+@media (max-width: 991.98px) {
+  .blog {
+    display: block; 
+  }
+  .blog .col-lg-6 {
+    display: block;
+    height: auto;
+  }
+  .blog-text {
+    justify-content: normal;
+  }
+  .blog-button {
+    align-self: stretch; 
+  }
+}
+
+@media (max-width: 1023px) {
+  .blog-title {
+    padding-top: 20px;
+  }
+  .blog-button {
+    margin-top: 10px;
+    width: 100%;
+  }
+}
+
