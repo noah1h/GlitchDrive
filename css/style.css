@@ -1402,7 +1402,7 @@ body.light-mode #footer *{
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 90vh;
+  min-height: 90vh;
   text-align: center;
 }
 .error-number {
@@ -1438,9 +1438,6 @@ body.light-mode #footer *{
   color: var(--background-color);
 }
 @media(max-width: 992px) {
-  #errorPage {
-    height: 100vh;
-  }
   .error-title {
     font-size: 45px;
   }
