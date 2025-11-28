@@ -42,6 +42,9 @@ Folder Structure
 
 index.html            → Homepage  
 about.html            → About the dealership  
+blogs.html            → Blogs page  
+blogs-article.html            → Blogs article page  
+404.html            → 404 Error page  
 car-details.html      → Dynamic car detail template  
 hearted.html          → Favorited cars  
 inventory.html        → Full car listing  
@@ -89,7 +92,7 @@ Support
 -----------------------------------------------------
 For any issues or questions, contact me via:
 📧 Email: noh.ms.sabry@gmail.com  
-💬 ThemeForest comments or profile messaging
+💬 ThemeForest/ThemeMonster comments or profile messaging
 
 -----------------------------------------------------
 License
