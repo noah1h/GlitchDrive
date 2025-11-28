@@ -19,6 +19,7 @@
   --card-color: #9ef01a; 
   --text-color: #1a1a1a;
   --desc-color: #414040;
+  --border-color: #7a7a7a1a;
 }
 
 :root {
@@ -1396,4 +1397,54 @@ body.light-mode #footer *{
 .blog-section-text {
   padding-top: 30px;
   color: var(--desc-color);
+}
+#errorPage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
+  text-align: center;
+}
+.error-number {
+  font-size: 150px;
+  font-weight: 900;
+  color: var(--secondary-color);
+}
+.error-title {
+  font-size: 50px;
+  font-weight: 800;
+  color: var(--text-color);
+}
+.error-desc {
+  font-size: 20px;
+  color: var(--desc-color);
+}
+
+.error-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px; 
+  flex-wrap: wrap; 
+}
+.error-button {
+  background-color: var(--secondary-color);
+  padding: 10px 15px;
+  color: var(--background-color);
+  font-size: 18px;
+  clip-path: var(--shape-mid);
+}
+.error-button:hover {
+  color: var(--background-color);
+}
+@media(max-width: 992px) {
+  #errorPage {
+    height: 100vh;
+  }
+  .error-title {
+    font-size: 45px;
+  }
+  .error-desc {
+    font-size: 18px;
+  }
 }
