@@ -348,7 +348,6 @@
                     <path d="M21 10c0 6-9 13-9 13s-9-7-9-13a9 9 0 1 1 18 0z"/>
                     <circle cx="12" cy="10" r="3" fill="var(--primary-color)"/>
                   </svg>
-                  
                   <span class="address-text info-text">Street 5, Berlin, Germany</span>
                 </div>
               </div>
@@ -357,31 +356,40 @@
           <div class="col-lg-8 col-md-12">
             <div class="contact-form-section flex-fill">
               <div class="title form-title text-center scramble-auto">Contact Form</div>
-              <form action="php/contact-handler.php" class="contact-form">
+              
+              <!-- Success Message -->
+              <div class="success-message" id="successMessage"></div>
+              
+              <form action="php/contact-handler.php" class="contact-form" id="contactForm">
                 <div class="row">
                   <div class="col-lg-6 col-md-12">
-                    <input type="text" class="first-name-input" placeholder="First Name">
+                    <input type="text" name="firstName" class="first-name-input" placeholder="First Name" required>
                     <div class="error-message"></div>
                   </div>
                   <div class="col-lg-6 col-md-12">
-                    <input type="text" class="last-name-input" placeholder="Last name">
+                    <input type="text" name="lastName" class="last-name-input" placeholder="Last name" required>
                     <div class="error-message"></div>
                   </div>
                   <div class="col-12">
-                <input type="text" class="subject-input" placeholder="Subject">
-                <div class="error-message"></div>
-                  </div>
-                  <div class="col-12">
-                    <input type="email" class="email-input" placeholder="Email">
+                    <input type="email" name="email" class="email-input" placeholder="Email" required>
                     <div class="error-message"></div>
                   </div>
                   <div class="col-12">
-                    <textarea name="" id="" placeholder="Your Message"></textarea>
+                    <input type="text" name="subject" class="subject-input" placeholder="Subject" required>
                     <div class="error-message"></div>
                   </div>
+                  <div class="col-12">
+                    <textarea name="message" placeholder="Your Message" required></textarea>
+                    <div class="error-message"></div>
+                  </div>
+                  
+                  <!-- Honeypot field (hidden from users, catches bots) -->
+                  <input type="text" name="website" style="position:absolute;left:-9999px;width:1px;height:1px;" tabindex="-1" autocomplete="off">
+                  
                   <div class="col-12">
                     <button type="submit" class="form-submit">
-                      <span class="submit-btn-text">Submit</span></button>
+                      <span class="submit-btn-text">Submit</span>
+                    </button>
                   </div>
                 </div>
               </form>
