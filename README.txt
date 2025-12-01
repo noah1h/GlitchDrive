@@ -88,15 +88,7 @@ Some images are sourced from:
 - [Freepik.com](https://www.freepik.com) – Authors: Mateus Andre, graphicforest  
 
 -----------------------------------------------------
-Support
------------------------------------------------------
-For any issues or questions, contact me via:
-📧 Email: noh.ms.sabry@gmail.com  
-💬 ThemeForest/ThemeMonster comments or profile messaging
-
------------------------------------------------------
 License
 -----------------------------------------------------
-This template is licensed under the ThemeForest Standard License.  
 Usage is permitted in a single end product for either personal or commercial use.
 

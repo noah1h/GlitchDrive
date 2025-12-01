@@ -117,6 +117,15 @@ body.light-mode #nav {
   color: var(--primary-color);
   transition: color 0.3s ease;
 }
+@media(max-width:1025px) {
+  .logo {
+    font-size: 20px;
+    padding-right: 20px;
+  }
+  .nav-links {
+    font-size: 14px;
+  }
+}
 .logo:hover {
   color: var(--secondary-color);
 }
@@ -339,6 +348,7 @@ body.light-mode .hearted-items.sidebar-heart:hover {
 }
 .sidebar {
   position: fixed;
+  height: calc(100vh - 70px);
   right: 0;
   left: 0;
   top: 70px;
@@ -347,6 +357,7 @@ body.light-mode .hearted-items.sidebar-heart:hover {
   display: none;
   z-index: 999;
   transition: none;
+  overflow-y: scroll;
 }
 body.light-mode .sidebar {
   background-color: #ffffff75;
@@ -582,54 +593,54 @@ body.light-mode .car-bg-circle {
 
 
 .car-1 {
-  background-image: url('https://placehold.co/600x400?text=Car+Image');
+  background-image: url('../imgs/Porsche.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
   transition: all 0.3s ease;
 }
 .car-1:hover {
-  background-image: url('https://placehold.co/600x400?text=Car+Interior');
+  background-image: url('../imgs/Porsche-interior.jpg');
 }
 .car-2 {
-  background-image: url('https://placehold.co/600x400?text=Car+Image');
+  background-image: url('../imgs/BMW.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
   transition: all 0.3s ease;
 }
 .car-2:hover {
-  background-image: url('https://placehold.co/600x400?text=Car+Interior');
+  background-image: url('../imgs/BMW-interior.jpg');
 }
 .car-3 {
-  background-image: url('https://placehold.co/600x400?text=Car+Image');
+  background-image: url('../imgs/Mercedes.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
   transition: all 0.3s ease;
 }
 .car-3:hover {
-  background-image: url('https://placehold.co/600x400?text=Car+Interior');
+  background-image: url('../imgs/class-S.jpg');
 }
 .car-4 {
-  background-image: url('https://placehold.co/600x400?text=Car+Image');
+  background-image: url('../imgs/Audi.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
   transition: all 0.3s ease;
 }
 .car-4:hover {
-  background-image: url('https://placehold.co/600x400?text=Car+Interior');
+  background-image: url('../imgs/Audi\ Interior.jpg');
 }
 .car-5 {
-  background-image: url('https://placehold.co/600x400?text=Car+Image');
+  background-image: url('../imgs/G-class.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
   transition: all 0.3s ease;
 }
 .car-5:hover {
-  background-image: url('https://placehold.co/600x400?text=Car+Interior');
+  background-image: url('../imgs/GClass-interior.jpg');
 }
 .car-name {
   text-align: start;
