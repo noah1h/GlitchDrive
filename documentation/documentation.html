@@ -1266,102 +1266,177 @@ function updateHeartedContainerDisplay() {
       <section id="contact-form" class="section">
         <h2>📧 Contact Form Setup</h2>
         
-        <p>The contact form is a crucial component for lead generation. It requires server-side processing to send emails. Here are several implementation options:</p>
+        <p>The contact form is a crucial component for lead generation. It requires server-side processing to send emails securely. Here's the recommended implementation:</p>
         
-        <h3>Option 1: PHP Implementation (Recommended)</h3>
+        <h3>PHP Implementation with PHPMailer (Recommended)</h3>
         <div class="steps">
           <div class="step">
-            <h4>Server Requirements</h4>
+            <h4>Step 1: Install PHPMailer</h4>
+            <p>Navigate to your project directory and run:</p>
+            <pre>composer require phpmailer/phpmailer</pre>
+          </div>
+          
+          <div class="step">
+            <h4>Step 2: Set Up Environment Variables</h4>
+            <p>Create a <code>.env</code> file in your project root (or set server environment variables):</p>
+            <pre>CONTACT_TO_EMAIL=your-email@domain.com
+      CONTACT_TO_NAME=Your Name
+      CONTACT_FROM_EMAIL=noreply@yourdomain.com
+      CONTACT_FROM_NAME=Website Contact Form
+      SITE_NAME=Your Website
+      
+      SMTP_HOST=smtp.gmail.com
+      SMTP_PORT=587
+      SMTP_USERNAME=your-gmail@gmail.com
+      SMTP_PASSWORD=your-app-password</pre>
+            <p><strong>For Gmail:</strong> Generate an App Password at <a href="https://myaccount.google.com/apppasswords" target="_blank">https://myaccount.google.com/apppasswords</a></p>
+          </div>
+          
+          <div class="step">
+            <h4>Step 3: Configure the Handler</h4>
+            <p>Edit <code>php/contact_handler.php</code> - Update these key settings:</p>
+            
+            <p><strong>Line 30</strong> - Update allowed origin:</p>
+            <pre>$allowed_origin = 'https://yourdomain.com'; // Change to your domain!</pre>
+            
+            <p><strong>Lines 40-55</strong> - Update configuration (if not using environment variables):</p>
+            <pre>$config = [
+          'to_email' => 'your-email@example.com',        // Your email
+          'to_name' => 'Your Name',                      // Your name
+          'from_email' => 'noreply@yourdomain.com',      // From email
+          'from_name' => 'Website Contact Form',         // From name
+          'site_name' => 'Your Website',                 // Site name
+          
+          'smtp_host' => 'smtp.gmail.com',               // SMTP server
+          'smtp_port' => 587,                            // SMTP port
+          'smtp_username' => 'your-gmail@gmail.com',     // SMTP username
+          'smtp_password' => 'your-app-password',        // App Password
+          'smtp_secure' => PHPMailer::ENCRYPTION_STARTTLS,
+          
+          'rate_limit_seconds' => 60,                    // Time between submissions
+          'rate_limit_max_attempts' => 3,                // Max attempts per period
+      ];</pre>
+          </div>
+          
+          <div class="step">
+            <h4>Step 4: Update Frontend JavaScript</h4>
+            <p>Your form submission needs to get a CSRF token first. Update your form handler:</p>
+            <pre>// Get CSRF token first
+      async function getCSRFToken() {
+          const response = await fetch('/php/contact_handler.php', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ get_token: true })
+          });
+          const data = await response.json();
+          return data.csrf_token;
+      }
+      
+      // Submit form with CSRF token
+      async function submitContactForm(formData) {
+          const csrfToken = await getCSRFToken();
+          
+          const response = await fetch('/php/contact_handler.php', {
+              method: 'POST',
+              headers: { 
+                  'Content-Type': 'application/json',
+                  'X-CSRF-Token': csrfToken 
+              },
+              body: JSON.stringify({
+                  firstName: formData.firstName,
+                  lastName: formData.lastName,
+                  email: formData.email,
+                  subject: formData.subject,
+                  message: formData.message,
+                  csrf_token: csrfToken
+              })
+          });
+          
+          return await response.json();
+      }</pre>
+          </div>
+          
+          <div class="step">
+            <h4>Step 5: Test the Handler</h4>
+            <p>Upload your files to a PHP-enabled server and test:</p>
+            <pre>curl -X POST https://yourdomain.com/php/contact_handler.php \
+        -H "Content-Type: application/json" \
+        -d '{"get_token": true}'</pre>
+            <p>You should receive a CSRF token in the response.</p>
+          </div>
+        </div>
+      
+        <div class="alert-info">
+          <strong>✅ Security Features Included:</strong>
+          <ul>
+            <li>CSRF token protection</li>
+            <li>IP-based rate limiting (3 requests per 60 seconds)</li>
+            <li>Email header injection prevention</li>
+            <li>Honeypot spam protection</li>
+            <li>Input validation and sanitization</li>
+            <li>Strict CORS policy</li>
+            <li>Suspicious pattern detection</li>
+            <li>Request logging</li>
+          </ul>
+        </div>
+      
+        <h3>Troubleshooting</h3>
+        <div class="steps">
+          <div class="step">
+            <h4>Email not sending?</h4>
             <ul>
-              <li>PHP 7.4 or higher</li>
-              <li>Mail server (SMTP) access</li>
-              <li>PHP mail() function enabled</li>
+              <li>Check SMTP credentials are correct</li>
+              <li>For Gmail, use App Password (not regular password)</li>
+              <li>Check server error logs: <code>tail -f /var/log/php_errors.log</code></li>
+              <li>Verify your hosting provider allows SMTP connections</li>
             </ul>
           </div>
           
           <div class="step">
-            <h4>Configure PHP Handler</h4>
-            <p>Edit <code>php/contact_handler.php</code> with your email settings:</p>
-            <pre>&lt;?php
-$to = "your-email@domain.com";
-$subject = "New Contact Form Submission";
-
-$first_name = $_POST['first_name'];
-$last_name = $_POST['last_name'];
-$email = $_POST['email'];
-$message = $_POST['message'];
-
-$body = "Name: $first_name $last_name\n";
-$body .= "Email: $email\n";
-$body .= "Message: $message\n";
-
-$headers = "From: $email\r\n";
-$headers .= "Reply-To: $email\r\n";
-
-if (mail($to, $subject, $body, $headers)) {
-    echo json_encode(['success' => true]);
-} else {
-    echo json_encode(['success' => false]);
-}
-?&gt;</pre>
+            <h4>CSRF errors?</h4>
+            <ul>
+              <li>Ensure your frontend requests a token before submitting</li>
+              <li>Check that cookies/sessions are enabled on your server</li>
+              <li>Verify the domain in CORS settings matches your frontend</li>
+            </ul>
           </div>
           
           <div class="step">
-            <h4>Test the Form</h4>
-            <p>Upload your files to a PHP-enabled server and test the contact form. Check your email inbox and server logs for any errors.</p>
+            <h4>Rate limit issues?</h4>
+            <ul>
+              <li>Adjust <code>rate_limit_seconds</code> and <code>rate_limit_max_attempts</code> in config</li>
+              <li>Clear rate limit file: <code>rm /tmp/contact_rate_limit.json</code></li>
+            </ul>
           </div>
         </div>
-
-        <h3>Option 2: EmailJS (No Backend Required)</h3>
+      
+        <h3>Alternative Options</h3>
+        
+        <h4>Option 2: EmailJS (No Backend Required)</h4>
         <div class="steps">
           <div class="step">
-            <h4>EmailJS Setup</h4>
             <ol>
               <li>Create account at <a href="https://emailjs.com" target="_blank">EmailJS.com</a></li>
               <li>Connect your email service (Gmail, Outlook, etc.)</li>
               <li>Create an email template</li>
               <li>Get your Service ID, Template ID, and Public Key</li>
+              <li>Replace form submission code in <code>script.js</code></li>
             </ol>
           </div>
-          
-          <div class="step">
-            <h4>JavaScript Integration</h4>
-            <p>Replace the form submission code in <code>script.js</code>:</p>
-            <pre>// EmailJS integration
-emailjs.init("YOUR_PUBLIC_KEY");
-
-document.querySelector('.contact-form').addEventListener('submit', function(e) {
-  e.preventDefault();
-  
-  const formData = {
-    first_name: document.querySelector('.first-name-input').value,
-    last_name: document.querySelector('.last-name-input').value,
-    email: document.querySelector('.email-input').value,
-    message: document.querySelector('textarea').value
-  };
-  
-  emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", formData)
-    .then(function(response) {
-      alert('Message sent successfully!');
-    }, function(error) {
-      alert('Failed to send message.');
-    });
-});</pre>
-          </div>
         </div>
-
-        <h3>Option 3: Netlify Forms</h3>
+      
+        <h4>Option 3: Netlify Forms</h4>
         <p>If hosting on Netlify, add the <code>netlify</code> attribute to your form:</p>
         <pre>&lt;form action="#" method="POST" class="contact-form" netlify&gt;
-  &lt;!-- form fields --&gt;
-&lt;/form&gt;</pre>
-
+        &lt;!-- form fields --&gt;
+      &lt;/form&gt;</pre>
+      
         <div class="alert-info">
           <strong>💡 Free Hosting Options for PHP:</strong>
           <ul>
             <li><a href="https://www.000webhost.com/" target="_blank">000webhost</a> - Free PHP hosting</li>
             <li><a href="https://www.infinityfree.net/" target="_blank">InfinityFree</a> - Unlimited free hosting</li>
-            <li><a href="https://www.freehostia.com/" target="_blank">Freehostia</a> - Free PHP hosting with MySQL</li>
+            <li><a href="https://www.awardspace.com/" target="_blank">AwardSpace</a> - Free PHP hosting with MySQL</li>
           </ul>
         </div>
       </section>
