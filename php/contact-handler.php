@@ -5,11 +5,23 @@ require 'vendor/autoload.php'; // Install: composer require phpmailer/phpmailer
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-// Set headers
+// Start session for CSRF and rate limiting
+session_start();
+
+// Set security headers
 header('Content-Type: application/json');
-header('Access-Control-Allow-Origin: *');
+header('X-Content-Type-Options: nosniff');
+header('X-Frame-Options: DENY');
+header('X-XSS-Protection: 1; mode=block');
+
+// CORS - UPDATE THIS TO YOUR DOMAIN
+$allowed_origin = 'https://yourdomain.com'; // Change this!
+if (isset($_SERVER['HTTP_ORIGIN']) && $_SERVER['HTTP_ORIGIN'] === $allowed_origin) {
+    header("Access-Control-Allow-Origin: {$allowed_origin}");
+    header('Access-Control-Allow-Credentials: true');
+}
 header('Access-Control-Allow-Methods: POST, OPTIONS');
-header('Access-Control-Allow-Headers: Content-Type');
+header('Access-Control-Allow-Headers: Content-Type, X-CSRF-Token');
 
 // Handle preflight OPTIONS request
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
@@ -24,35 +36,111 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 // ========================================
-// CONFIGURATION - UPDATE THESE VALUES
+// CONFIGURATION - USE ENVIRONMENT VARIABLES
 // ========================================
 $config = [
-    'to_email' => 'your-email@example.com',
-    'to_name' => 'Your Name',
-    'from_email' => 'noreply@yourdomain.com',
-    'from_name' => 'Website Contact Form',
-    'site_name' => 'Your Website',
+    'to_email' => getenv('CONTACT_TO_EMAIL') ?: 'your-email@example.com',
+    'to_name' => getenv('CONTACT_TO_NAME') ?: 'Your Name',
+    'from_email' => getenv('CONTACT_FROM_EMAIL') ?: 'noreply@yourdomain.com',
+    'from_name' => getenv('CONTACT_FROM_NAME') ?: 'Website Contact Form',
+    'site_name' => getenv('SITE_NAME') ?: 'Your Website',
     
-    // SMTP Settings (Gmail example)
-    'smtp_host' => 'smtp.gmail.com',
-    'smtp_port' => 587,
-    'smtp_username' => 'your-gmail@gmail.com',
-    'smtp_password' => 'your-app-password', // Use App Password, not regular password
-    'smtp_secure' => PHPMailer::ENCRYPTION_STARTTLS, // or PHPMailer::ENCRYPTION_SMTPS for port 465
+    // SMTP Settings (use environment variables)
+    'smtp_host' => getenv('SMTP_HOST') ?: 'smtp.gmail.com',
+    'smtp_port' => getenv('SMTP_PORT') ?: 587,
+    'smtp_username' => getenv('SMTP_USERNAME') ?: 'your-gmail@gmail.com',
+    'smtp_password' => getenv('SMTP_PASSWORD') ?: 'your-app-password',
+    'smtp_secure' => PHPMailer::ENCRYPTION_STARTTLS,
+    
+    // Rate limiting
+    'rate_limit_file' => sys_get_temp_dir() . '/contact_rate_limit.json',
+    'rate_limit_seconds' => 60,
+    'rate_limit_max_attempts' => 3,
 ];
 
 // ========================================
-// RATE LIMITING (Simple session-based)
+// CSRF TOKEN VALIDATION
 // ========================================
-session_start();
-$rate_limit_time = 60; // seconds between submissions
-$last_submission = $_SESSION['last_contact_submission'] ?? 0;
+function validateCSRFToken($token) {
+    if (!isset($_SESSION['csrf_token'])) {
+        return false;
+    }
+    return hash_equals($_SESSION['csrf_token'], $token);
+}
 
-if (time() - $last_submission < $rate_limit_time) {
+// Get CSRF token from headers or POST data
+$input = json_decode(file_get_contents('php://input'), true);
+$csrf_token = $_SERVER['HTTP_X_CSRF_TOKEN'] ?? $input['csrf_token'] ?? '';
+
+// Skip CSRF check for token generation request
+if (!isset($input['get_token'])) {
+    if (empty($csrf_token) || !validateCSRFToken($csrf_token)) {
+        http_response_code(403);
+        echo json_encode(['success' => false, 'message' => 'Invalid security token']);
+        exit;
+    }
+}
+
+// Handle token generation request
+if (isset($input['get_token']) && $input['get_token'] === true) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+    echo json_encode(['success' => true, 'csrf_token' => $_SESSION['csrf_token']]);
+    exit;
+}
+
+// ========================================
+// RATE LIMITING (IP-based with file storage)
+// ========================================
+function getRateLimitData($file) {
+    if (!file_exists($file)) {
+        return [];
+    }
+    $data = json_decode(file_get_contents($file), true);
+    return is_array($data) ? $data : [];
+}
+
+function saveRateLimitData($file, $data) {
+    file_put_contents($file, json_encode($data), LOCK_EX);
+}
+
+function cleanOldEntries(&$data, $timeout) {
+    $current_time = time();
+    foreach ($data as $ip => $timestamps) {
+        $data[$ip] = array_filter($timestamps, function($timestamp) use ($current_time, $timeout) {
+            return ($current_time - $timestamp) < $timeout;
+        });
+        if (empty($data[$ip])) {
+            unset($data[$ip]);
+        }
+    }
+}
+
+function isRateLimited($config) {
+    $ip = $_SERVER['REMOTE_ADDR'] ?? 'unknown';
+    $rate_data = getRateLimitData($config['rate_limit_file']);
+    
+    // Clean old entries
+    cleanOldEntries($rate_data, $config['rate_limit_seconds']);
+    
+    // Check rate limit
+    $attempts = $rate_data[$ip] ?? [];
+    if (count($attempts) >= $config['rate_limit_max_attempts']) {
+        return true;
+    }
+    
+    // Add current attempt
+    $attempts[] = time();
+    $rate_data[$ip] = $attempts;
+    saveRateLimitData($config['rate_limit_file'], $rate_data);
+    
+    return false;
+}
+
+if (isRateLimited($config)) {
     http_response_code(429);
     echo json_encode([
         'success' => false, 
-        'message' => 'Please wait before submitting another message'
+        'message' => 'Too many requests. Please wait before submitting again.'
     ]);
     exit;
 }
@@ -60,15 +148,13 @@ if (time() - $last_submission < $rate_limit_time) {
 // ========================================
 // GET AND VALIDATE INPUT
 // ========================================
-$input = json_decode(file_get_contents('php://input'), true);
-
 if (!$input) {
     http_response_code(400);
     echo json_encode(['success' => false, 'message' => 'Invalid JSON']);
     exit;
 }
 
-// Sanitize inputs
+// Sanitize and validate inputs
 $first_name = htmlspecialchars(trim($input['firstName'] ?? ''), ENT_QUOTES, 'UTF-8');
 $last_name = htmlspecialchars(trim($input['lastName'] ?? ''), ENT_QUOTES, 'UTF-8');
 $email = filter_var(trim($input['email'] ?? ''), FILTER_VALIDATE_EMAIL);
@@ -80,18 +166,42 @@ $honeypot = $input['website'] ?? '';
 
 // Validation
 $errors = [];
-if (empty($first_name)) $errors[] = 'First name is required';
-if (empty($last_name)) $errors[] = 'Last name is required';
-if (!$email) $errors[] = 'Valid email is required';
-if (empty($subject)) $errors[] = 'Subject is required';
-if (empty($message)) $errors[] = 'Message is required';
-if (strlen($message) < 10) $errors[] = 'Message must be at least 10 characters';
-if (strlen($message) > 5000) $errors[] = 'Message is too long';
+if (empty($first_name)) {
+    $errors[] = 'First name is required';
+} elseif (strlen($first_name) > 50) {
+    $errors[] = 'First name is too long';
+}
 
-// Honeypot check
+if (empty($last_name)) {
+    $errors[] = 'Last name is required';
+} elseif (strlen($last_name) > 50) {
+    $errors[] = 'Last name is too long';
+}
+
+if (!$email) {
+    $errors[] = 'Valid email is required';
+} elseif (strlen($email) > 100) {
+    $errors[] = 'Email is too long';
+}
+
+if (empty($subject)) {
+    $errors[] = 'Subject is required';
+} elseif (strlen($subject) > 200) {
+    $errors[] = 'Subject is too long';
+}
+
+if (empty($message)) {
+    $errors[] = 'Message is required';
+} elseif (strlen($message) < 10) {
+    $errors[] = 'Message must be at least 10 characters';
+} elseif (strlen($message) > 5000) {
+    $errors[] = 'Message is too long (max 5000 characters)';
+}
+
+// Honeypot check - log and silently fail for bots
 if (!empty($honeypot)) {
-    // Silently fail for bots
-    echo json_encode(['success' => true, 'message' => 'Email sent successfully']);
+    error_log("Contact form bot detected from IP: " . ($_SERVER['REMOTE_ADDR'] ?? 'unknown'));
+    echo json_encode(['success' => true, 'message' => 'Thank you! Your message has been sent.']);
     exit;
 }
 
@@ -101,128 +211,43 @@ if (!empty($errors)) {
     exit;
 }
 
+// Additional security checks
+$suspicious_patterns = [
+    'content-type:',
+    'bcc:',
+    'cc:',
+    'to:',
+    '\r',
+    '\n',
+];
+
+foreach ([$email, $first_name, $last_name, $subject] as $field) {
+    foreach ($suspicious_patterns as $pattern) {
+        if (stripos($field, $pattern) !== false) {
+            error_log("Suspicious contact form submission from IP: " . ($_SERVER['REMOTE_ADDR'] ?? 'unknown'));
+            http_response_code(400);
+            echo json_encode(['success' => false, 'message' => 'Invalid input detected']);
+            exit;
+        }
+    }
+}
+
 // ========================================
 // PREPARE EMAIL
 // ========================================
 $full_name = $first_name . ' ' . $last_name;
 $email_subject = "[{$config['site_name']}] {$subject}";
+$ip_address = $_SERVER['REMOTE_ADDR'] ?? 'unknown';
 
-$email_body = "
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset='UTF-8'>
-    <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            margin: 0;
-            padding: 0;
-        }
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
-            background: #ffffff;
-        }
-        .header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 30px 20px;
-            text-align: center;
-        }
-        .header h1 {
-            margin: 0;
-            font-size: 24px;
-            font-weight: 600;
-        }
-        .content {
-            padding: 30px 20px;
-            background: #f8f9fa;
-        }
-        .field {
-            margin-bottom: 20px;
-            background: white;
-            padding: 15px;
-            border-radius: 8px;
-            border-left: 4px solid #667eea;
-        }
-        .label {
-            font-weight: 600;
-            color: #667eea;
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 5px;
-        }
-        .value {
-            color: #333;
-            font-size: 15px;
-        }
-        .message-box {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            border: 1px solid #e0e0e0;
-            white-space: pre-wrap;
-            word-wrap: break-word;
-        }
-        .footer {
-            padding: 20px;
-            text-align: center;
-            font-size: 12px;
-            color: #666;
-            background: #f0f0f0;
-        }
-    </style>
-</head>
-<body>
-    <div class='container'>
-        <div class='header'>
-            <h1>📧 New Contact Form Submission</h1>
-        </div>
-        <div class='content'>
-            <div class='field'>
-                <div class='label'>From</div>
-                <div class='value'>{$full_name}</div>
-            </div>
-            
-            <div class='field'>
-                <div class='label'>Email</div>
-                <div class='value'><a href='mailto:{$email}'>{$email}</a></div>
-            </div>
-            
-            <div class='field'>
-                <div class='label'>Subject</div>
-                <div class='value'>{$subject}</div>
-            </div>
-            
-            <div class='field'>
-                <div class='label'>Message</div>
-                <div class='message-box'>{$message}</div>
-            </div>
-            
-            <div class='field'>
-                <div class='label'>Submitted</div>
-                <div class='value'>" . date('F j, Y \a\t g:i A T') . "</div>
-            </div>
-        </div>
-        <div class='footer'>
-            This email was sent from your website contact form.<br>
-            Reply directly to this email to respond to {$full_name}.
-        </div>
-    </div>
-</body>
-</html>
-";
-
-// Plain text version
+// Plain text email body
 $text_body = "New Contact Form Submission\n\n";
 $text_body .= "From: {$full_name}\n";
 $text_body .= "Email: {$email}\n";
 $text_body .= "Subject: {$subject}\n\n";
 $text_body .= "Message:\n{$message}\n\n";
-$text_body .= "Submitted: " . date('F j, Y \a\t g:i A T');
+$text_body .= "---\n";
+$text_body .= "Submitted: " . date('F j, Y \a\t g:i A T') . "\n";
+$text_body .= "IP Address: {$ip_address}\n";
 
 // ========================================
 // SEND EMAIL WITH PHPMAILER
@@ -239,23 +264,23 @@ try {
     $mail->SMTPSecure = $config['smtp_secure'];
     $mail->Port = $config['smtp_port'];
     $mail->CharSet = 'UTF-8';
+    $mail->SMTPDebug = 0; // Disable debug output in production
     
     // Recipients
     $mail->setFrom($config['from_email'], $config['from_name']);
     $mail->addAddress($config['to_email'], $config['to_name']);
-    $mail->addReplyTo($email, $full_name); // Reply to the sender
+    $mail->addReplyTo($email, $full_name);
     
     // Content
-    $mail->isHTML(true);
+    $mail->isHTML(false); // Plain text email
     $mail->Subject = $email_subject;
-    $mail->Body = $email_body;
-    $mail->AltBody = $text_body;
+    $mail->Body = $text_body;
     
     // Send
     $mail->send();
     
-    // Update rate limit
-    $_SESSION['last_contact_submission'] = time();
+    // Log successful submission
+    error_log("Contact form submission from: {$email} (IP: {$ip_address})");
     
     echo json_encode([
         'success' => true,
@@ -263,7 +288,7 @@ try {
     ]);
     
 } catch (Exception $e) {
-    error_log("Contact form error: {$mail->ErrorInfo}");
+    error_log("Contact form error: {$mail->ErrorInfo} (IP: {$ip_address})");
     http_response_code(500);
     echo json_encode([
         'success' => false,
